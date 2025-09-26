@@ -28,8 +28,16 @@ Right now this repo only works with rinkeby. Run the following.
 ### Setup Environment Variables
 You'll need a `MNEMONIC` and a rinkeby `RINKEBY_RPC_URL` environment variable. Your `MNEMONIC` is your seed phrase of your wallet. You can find an `RINKEBY_RPC_URL` from node provider services like [Infura](https://infura.io/)
 
-Then, either set them in a `bash_profile` file or export them into your terminal like:
+Then, you can create a `.env` file with the following.
 
+```bash
+MNEMONIC='cat dog frog....'
+RINKEBY_RPC_URL='www.infura.io/asdfadsfafdadf'
+```
+
+Or, set them in a `bash_profile` file or export them directly into your terminal. You can learn more about [environment variables here](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). 
+
+To run them directly in your terminal, run: 
 ```bash
 export MNEMONIC='cat dog frog....'
 export RINKEBY_RPC_URL='www.infura.io/asdfadsfafdadf'
@@ -41,8 +49,7 @@ Then you can get started with:
 ```
 git clone https://github.com/PatrickAlphaC/dungeons-and-dragons-nft
 cd dungeons-and-dragons-nft
-git checkout opensea-update
-npm install
+yarn
 truffle migrate --reset --network rinkeby
 ```
 
@@ -61,12 +68,12 @@ Depending how often you deploy, you can pick which character by changing the [`d
 
 This will give you the overview of your NFT. You'll see `BN` since the call returns big numbers, you can cast them to ints to see what they are.... Or you could go one step farther
 
-### See it on etherscan or onclickdapp
+### See it on etherscan or oneclickdapp
 
 You can get an [Etherscan API key](https://etherscan.io/apis) for free and interact with the NFTs on chain. Then set `ETHERSCAN_API_KEY ` as an environment variable.
 
 ```bash
-npm install truffle-plugin-verify
+yarn add truffle-plugin-verify
 truffle run verify DungeonsAndDragonsCharacter --network rinkeby --license MIT
 ```
 
@@ -95,7 +102,7 @@ We are going to be storing these images and meta data in IPFS. You'll need both:
 2. [IPFS companion](https://chrome.google.com/webstore/detail/ipfs-companion/nibjojkomfdiaoajekhjakgkdhaomnch?hl=en)
 3. [Pinata](https://pinata.cloud/pinataupload)
 
-IPFS is a blockchain for storing files. It's free and open sourced, and we can use it to host our tokenURI. The IPFS companion let's us view IPFS data nativly in our browsers like Brave or Chrome. And Pinata allows us to keep our IPFS files up even when our node is down (don't worry about that for now)
+IPFS is a peer to peer network for storing files. It's free and open sourced, and we can use it to host our tokenURI. The IPFS companion let's us view IPFS data nativly in our browsers like Brave or Chrome. And Pinata allows us to keep our IPFS files up even when our node is down (don't worry about that for now)
 
 Once our IPFS node is up, we can start adding files to it. We first want to upload the image of our NFT. What does this D&D character look like? Add it to your IPFS node and then "Pin" it. Once pinned, you can get the CID of the pinned file, and make sure it stays pinned by pinning it on your Pinata account. Don't worry, it's free! This will just help keep the data up even when our IPFS node is down. 
 
@@ -112,9 +119,9 @@ This metadata json file is going to be our `tokenURI`, so we will modify our `se
 Then we just run it like:
 
 ```
-truffle exec scripts/set-token-uri.js --network mainnet
+truffle exec scripts/set-token-uri.js --network rinkeby
 ```
 
-Now, we can get the address of our NFT and head on over to the opensea testnet marketplace to see if we did it correctly. If done correctly, it'll look [something like this](https://testnets.opensea.io/storefront/dungeonsanddragonscharacter-v9).
+Now, we can get the address of our NFT and head on over to the opensea testnet marketplace to see if we did it correctly. If done correctly, it'll look [something like this](https://testnets.opensea.io/assets/dungeonsanddragonscharacter-v9).
 
 [Here is the link for adding your testnet NFT contract to be viewed on opensea.](https://testnets.opensea.io/get-listed/step-two)
