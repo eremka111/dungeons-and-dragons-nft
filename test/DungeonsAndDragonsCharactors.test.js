@@ -1,7 +1,11 @@
 
-const { LinkToken } = require('@chainlink/contracts/truffle/v0.4/LinkToken')
-const DungeonsAndDragonsCharacter = artifacts.require('DungeonsAndDragonsCharacter.sol')
+const { expectRevert } = require('@openzeppelin/test-helpers')
+
+const CHARACTER_NAME = "Shrek"
+
 contract('DungeonsAndDragonsCharacter', accounts => {
+    const { LinkToken } = require('@chainlink/contracts/truffle/v0.4/LinkToken')
+    const DungeonsAndDragonsCharacter = artifacts.require('DungeonsAndDragonsCharacter.sol')
     const defaultAccount = accounts[0]
 
     let link, dnd
@@ -10,9 +14,5 @@ contract('DungeonsAndDragonsCharacter', accounts => {
         link = await LinkToken.new({ from: defaultAccount })
         dnd = await DungeonsAndDragonsCharacter.new({ from: defaultAccount })
     })
-
-    describe('#requestNewRandomCharacter', () => {
-
-    })
-
-})  
+    // TODO
+})
